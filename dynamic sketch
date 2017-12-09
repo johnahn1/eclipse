@@ -1,0 +1,65 @@
+int x1 = 400;
+int x2 = 300;
+int x3 = 200;
+int grow1 = 3;
+int grow2 = 3;
+int grow3 = 3;
+int w = 100;
+
+void setup ()   {
+   size(800,800);
+   background(150);
+ 
+  
+}
+
+void draw()  {
+   fill(255,0,0);
+   if (grow1 > 0) {
+     stroke(255,0,0) ;
+   } else {
+      stroke (0, 0, 0);
+   }
+   ellipse(x1, 200, w,w);
+
+
+   stroke (0, 255, 0 );
+   ellipse(x2, 400, w,w);
+   
+   
+   
+   stroke (0, 0, 255);
+   ellipse(x3, 600, w,w);
+   x1 = x1 + grow1;
+   x2 = x2 + grow2;
+   x3 = x3 + grow3;
+   
+
+   if (x1> (width - w/2) || (x1 < (w/2))) {
+     grow1 = -1 * grow1;
+     
+   }
+   
+   if (x2> (width - w/2) || (x2 < (w/2))) {
+     grow2 = -1 * grow2;
+   }
+   if (x3> (width - w/2) || (x3 < (w/2))) {
+     grow3 = -1 * grow3;
+     
+   }
+
+}
+
+void mouseClicked() {
+  if  (mouseY <450 && mouseY >350) {
+  grow2 = -1 * grow2;
+  }
+  
+  if  (mouseY >550 && mouseY <650) {
+    if (grow3 >0){
+     grow3++;
+    }else {
+      grow3--;
+    }
+  }
+}
