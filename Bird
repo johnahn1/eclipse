@@ -1,0 +1,66 @@
+//flappy
+Bird bird;
+
+
+void setup() {
+  size(800,800);
+  bird = new Bird();
+  
+  
+}
+
+void draw() {
+  background (0);
+  bird.show();
+  bird.update();
+}
+
+void keyPressed(){
+ if (key == ' ') {
+    println("space");
+    bird.up();
+    
+ }
+}
+
+//bird
+class Bird {
+  float x;
+  float y;
+  float gravity;
+  float velocity;
+  float lift;
+  
+  Bird() {
+   x = 64;
+   y= height/2;
+   gravity = 0.6;
+   velocity = 0;
+   lift = 15;
+   
+  }
+
+
+  void show() {
+   fill(255);
+   ellipse(x, y, 32,32);
+  }
+  
+  void update() {
+    velocity = velocity + gravity;
+    
+    y = y+velocity; 
+    
+    if (y > height) {
+      y = height;
+      velocity = 0;
+      
+    }
+  }
+  
+  void up() {
+   velocity = velocity - lift;
+    
+  }
+  
+}
