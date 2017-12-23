@@ -1,0 +1,165 @@
+//flappy
+Bird bird;
+ArrayList<Pipe> pipes = new ArrayList<Pipe>();
+
+
+void setup() {
+  size(800,800);
+  pipes.add(new Pipe());
+  bird = new Bird();
+  
+  
+}
+
+void draw() {
+  background (0);
+  
+  for (int i=0; i< pipes.size(); i++) {
+    pipes.get(i).show();
+    pipes.get(i).update();
+    
+    if (pipes.get(i).hits(bird)) {
+     //print("hits: " + str(i));
+     
+      
+    }
+    
+    
+    if (pipes.get(i).offscreen()) {
+       pipes.remove(i);
+      
+    }
+  }
+  
+  bird.show();
+  bird.update();
+  
+  
+  if (frameCount % 100 == 0) {
+   pipes.add(new Pipe());
+    println("size: " +str( pipes.size()));
+}
+}
+
+void keyPressed(){
+ if (key == ' ') {
+    // println("space");
+    bird.up();
+    
+ }
+}
+
+//Bird
+class Bird {
+  float x;
+  float y;
+  float gravity;
+  float velocity;
+  float lift;
+  
+  Bird() {
+   x = 64;
+   y= height/2;
+   gravity = 1;
+   velocity = 0;
+   lift = 15;
+   
+  }
+
+
+  void show() {
+   fill(255);
+   ellipse(x, y, 32,32);
+  }
+  
+  void update() {
+    velocity = velocity + gravity;
+    velocity = velocity * 0.9;
+    
+    y = y+velocity; 
+    
+    if (y > height) {
+      y = height;
+      velocity = 0;
+      
+    }
+    
+    if (y < 0) {
+     y = 0;
+     velocity = 0;
+      
+    }
+  }
+  
+  void up() {
+   velocity = velocity - lift;
+    
+  }
+  
+}
+
+//Pipe
+
+class Pipe {
+  float top;
+  float bottom;
+  float x;
+  float w;
+  float speed;
+  boolean highlight;
+  
+  Pipe() {
+   top = random(height/2);
+   bottom = random(height/2);
+   x = width;
+   w = 20;
+   speed = 1;
+   highlight = false; 
+  }
+  
+  void show() {
+    if (highlight) {
+      fill(255, 0, 0);
+    }
+    else {
+      fill (0,255,0);
+      
+    }
+ 
+    rect(x, 0, w, top);
+    rect(x, height - bottom, w, bottom);
+    
+  }
+  
+  void update() {
+    x = x - speed;
+  }
+  
+  boolean hits(Bird bird) {
+    if (bird.y < top || bird.y > height - bottom) {
+      if(bird.x> x && bird.x < x+w) {
+        highlight = true;
+        return true;
+      
+      }
+      
+      
+     }
+      return false;
+      
+  }
+
+  boolean offscreen() {
+    if (x < -w) {
+     return true;
+     
+    }  else {
+      
+      return false;
+      
+    }
+  }
+  
+  
+  
+}
