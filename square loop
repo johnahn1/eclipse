@@ -1,0 +1,69 @@
+import fluo
+UP = 0
+RIGHT = 1
+DOWN = 2
+LEFT = 3
+
+
+def setup():
+    
+    size(400, 400)
+    background(0)
+    
+    angle = 0
+    
+    
+def draw():
+    
+    global angle, annaX, annaY, annaDir
+    annaX = -50
+    annaY = 0
+    annaDir=RIGHT
+    
+    stroke (0, 255, 0)
+    strokeWeight(2)
+
+    
+    translate(width/2, height/2)
+    fluo.showGrid()
+
+    for i in range (4):
+        print("i" + str(1))
+        moveForward()
+        turn(RIGHT)
+
+    
+def turn(dir = RIGHT):
+    global annaDir
+    if (dir == RIGHT):
+        annaDir = annaDir + 1
+    else:
+        annaDir = annaDir - 1
+    
+    if (annaDir > 3):
+        annaDir = annaDir % 4
+        
+    if (annaDir < 0):
+        annaDir = annaDir + 4
+    
+def moveForward(amount=100):
+    global annaX, annaY
+    x = annaX
+    y = annaY
+    dir = annaDir
+   # move up
+    if (dir == UP):
+        line(x, y, x, y - amount)
+        annaY = y -amount
+    # move right
+    elif (dir == RIGHT):
+        line(x, y, x + amount, y)
+        annaX = x + amount
+    # move down
+    elif (dir == DOWN):
+        line(x, y, x, y + amount)
+        annaY = y +amount
+    # move left
+    else:
+        line(x, y, x - amount, y)
+        annaX = x - amount
