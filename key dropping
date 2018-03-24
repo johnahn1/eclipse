@@ -1,0 +1,41 @@
+ch = 'a'
+ch2 = 'b'
+y = 0   
+y2 = 0 
+
+def setup():
+    size(600, 600)
+    background(220)
+    textSize(32)
+    
+def draw():
+    #A
+    global ch, y, ch2, y2
+    background(220)
+    
+    text(ch, width/2, y)
+    y += 1
+    
+    if (y > height):
+        y = 0
+
+    fill(255, 0, 0)    
+    text(str(y), width - 100, 32)
+    
+    
+    #B
+    text(ch2, width/3, y2)
+    y2 += 2
+    
+    if (y2 > height):
+        y2 = 0
+
+    fill(255, 0, 0)    
+    text(str(y2), width - 500, 32)
+
+    
+def keyTyped():
+    global ch, chb
+    fill(random(256), random(256), random(256))
+    ch = key
+    chb = key
