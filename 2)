@@ -1,0 +1,17 @@
+def setup():
+    size(200, 200)
+    
+def draw():
+    background(0)
+    # #stroke(255)
+    # for x in range(width):
+    #     for y in range(height):
+            #y = map(y, 0, 199, 0, 255)
+            #print(y)
+            # stroke(y)
+            # point(x, y)
+    pink = color(255, 102, 204)
+    loadPixels()
+    for i in range((width*height/2)-width/2): 
+        pixels[i] = pink
+    updatePixels()
