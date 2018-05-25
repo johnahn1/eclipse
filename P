@@ -1,0 +1,21 @@
+def setup():
+    size(200, 200)
+    
+    
+def draw():
+    #background(255,0,0)
+    #stroke(255, 0, 0)
+    yoff = 0
+    loadPixels()
+    for y in range(height):
+        for x in range (width):
+            xoff = 0
+            #r = random(256)
+            r = noise(xoff, yoff)
+            r = map(r, 0, 1, 0, 255)
+            index = x + y*width
+            pixels[index] = color(r,r, r)
+            xoff += 0.01
+            
+    updatePixels()
+    noLoop()
