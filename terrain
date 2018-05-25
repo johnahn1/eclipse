@@ -6,6 +6,8 @@ w = 600
 h = 600
 
 angle = 0
+
+flying =0
 def setup():
     global cols, rows, terrain
     size(600, 600, P3D)
@@ -23,9 +25,12 @@ def setup():
             xoff += .2
         yoff += 0.2
             
-    frameRate(5)
+
 def draw():
-    global angle, terrain
+    global angle, terrain, flying
+    flying = yoff
+    flying -= .1
+    
     background(0)
     stroke(255)
     noFill()
